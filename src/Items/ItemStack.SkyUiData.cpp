@@ -10,10 +10,10 @@ namespace QuickLoot::Items
 		// https://github.com/schlangster/skyui/blob/835428728e2305865e220fdfc99d791434955eb1/src/ItemMenus/InventoryDataSetter.as#L24
 
 		const auto player = RE::PlayerCharacter::GetSingleton();
-		const auto value = _data.value.value;
-		const auto weight = std::max(0.0f, _data.weight.value);
+		//const auto value = _data.value.value;
+		//const auto weight = std::max(0.0f, _data.weight.value);
 
-		_data.baseId = _object->formID & 0xFFFFFF;
+		//_data.baseId = _object->formID & 0xFFFFFF;
 		_data.type = GetItemType();
 
 		_data.isEquipped = _data.equipState > 0;
@@ -22,16 +22,16 @@ namespace QuickLoot::Items
 		//if (value > 0) { // This does nothing for integers
 		//	_data.infoValue = TruncatePrecision(value);
 		//}
-		if (weight > 0) {
-			_data.infoWeight = TruncatePrecision(weight);
-		}
-		if (value > 0 && weight > 0) {
-			_data.infoValueWeight = RoundValue(value / weight);
-		}
+		//if (weight > 0) {
+		//	_data.infoWeight = TruncatePrecision(weight);
+		//}
+		//if (value > 0 && weight > 0) {
+		//	_data.infoValueWeight = RoundValue(value / weight);
+		//}
 
 		switch (_object->formType.get()) {
 		case RE::FormType::Scroll:
-			_data.subTypeDisplay = "$Scroll";
+			//_data.subTypeDisplay = "$Scroll";
 
 			//_data.magic.duration = TruncatePrecision(_data.magic.duration); // This does nothing for integers
 			_data.magic.magnitude = TruncatePrecision(_data.magic.magnitude);
@@ -39,7 +39,7 @@ namespace QuickLoot::Items
 
 		case RE::FormType::Armor:
 			_data.armor.isEnchanted = _entry->IsEnchanted();
-			_data.armor.infoArmor = TruncatePrecision(player->GetArmorValue(_entry.get()));
+			//_data.armor.infoArmor = TruncatePrecision(player->GetArmorValue(_entry.get()));
 
 			SkyUiProcessArmorClass();
 			SkyUiProcessArmorPartMask();
@@ -53,11 +53,11 @@ namespace QuickLoot::Items
 			break;
 
 		case RE::FormType::Ingredient:
-			_data.subTypeDisplay = "$Ingredient";
+			//_data.subTypeDisplay = "$Ingredient";
 			break;
 
 		case RE::FormType::Light:
-			_data.subTypeDisplay = "$Torch";
+			//_data.subTypeDisplay = "$Torch";
 			break;
 
 		case RE::FormType::Misc:
@@ -68,7 +68,7 @@ namespace QuickLoot::Items
 		case RE::FormType::Weapon:
 			_data.weapon.isEnchanted = _entry->IsEnchanted();
 			_data.weapon.isPoisoned = _entry->extraLists && !_entry->extraLists->empty() && !_entry->extraLists->front()->HasType(RE::ExtraDataType::kPoison);
-			_data.weapon.infoDamage = TruncatePrecision(player->GetDamage(_entry.get()));
+			//_data.weapon.infoDamage = TruncatePrecision(player->GetDamage(_entry.get()));
 
 			SkyUiProcessWeaponType();
 			SkyUiProcessMaterialKeywords();
@@ -77,7 +77,7 @@ namespace QuickLoot::Items
 
 		case RE::FormType::Ammo:
 			_data.ammo.isEnchanted = _entry->IsEnchanted();
-			_data.ammo.infoDamage = TruncatePrecision(player->GetDamage(_entry.get()));
+			//_data.ammo.infoDamage = TruncatePrecision(player->GetDamage(_entry.get()));
 
 			SkyUiProcessAmmoType();
 			SkyUiProcessMaterialKeywords();
@@ -115,28 +115,28 @@ namespace QuickLoot::Items
 		if (const auto armor = skyrim_cast<RE::TESObjectARMO*>(_object)) {
 			switch (static_cast<ArmorWeightClass>(armor->bipedModelData.armorType.underlying())) {
 			case ArmorWeightClass::kLight:
-				_data.armor.weightClassDisplay = "$Light";
+				//_data.armor.weightClassDisplay = "$Light";
 				break;
 
 			case ArmorWeightClass::kHeavy:
-				_data.armor.weightClassDisplay = "$Heavy";
+				//_data.armor.weightClassDisplay = "$Heavy";
 				break;
 
 			case ArmorWeightClass::kNone:
 				if (_object->HasKeywordByEditorID("VendorItemClothing")) {
 					_data.armor.weightClass = ArmorWeightClass::kClothing;
-					_data.armor.weightClassDisplay = "$Clothing";
+					//_data.armor.weightClassDisplay = "$Clothing";
 					break;
 				}
 
 				if (_object->HasKeywordByEditorID("VendorItemJewelry")) {
 					_data.armor.weightClass = ArmorWeightClass::kJewelry;
-					_data.armor.weightClassDisplay = "$Jewelry";
+					//_data.armor.weightClassDisplay = "$Jewelry";
 					break;
 				}
 
 				_data.armor.weightClass.unset();
-				_data.armor.weightClassDisplay = "$Other";
+				//_data.armor.weightClassDisplay = "$Other";
 				break;
 
 			default:
@@ -171,7 +171,7 @@ namespace QuickLoot::Items
 			for (const auto& partEntry : ArmorSubTypeTable) {
 				if (partEntry.slot == mainPartMask) {
 					_data.armor.subType = partEntry.subType;
-					_data.subTypeDisplay = partEntry.subTypeDisplay;
+					//_data.subTypeDisplay = partEntry.subTypeDisplay;
 					return;
 				}
 			}
@@ -201,7 +201,7 @@ namespace QuickLoot::Items
 		case ArmorSlot::kShield:
 		case ArmorSlot::kTail:
 			_data.armor.weightClass = ArmorWeightClass::kClothing;
-			_data.armor.weightClassDisplay = "$Clothing";
+			//_data.armor.weightClassDisplay = "$Clothing";
 			break;
 
 		case ArmorSlot::kAmulet:
@@ -209,7 +209,7 @@ namespace QuickLoot::Items
 		case ArmorSlot::kCirclet:
 		case ArmorSlot::kEars:
 			_data.armor.weightClass = ArmorWeightClass::kJewelry;
-			_data.armor.weightClassDisplay = "$Jewelry";
+			//_data.armor.weightClassDisplay = "$Jewelry";
 			break;
 
 		default:
@@ -225,12 +225,12 @@ namespace QuickLoot::Items
 
 		if (_object == KnownForms::ClothesWeddingWreath) {
 			_data.armor.weightClass = ArmorWeightClass::kJewelry;
-			_data.armor.weightClassDisplay = "$Jewelry";
+			//_data.armor.weightClassDisplay = "$Jewelry";
 		}
 
 		if (_object == KnownForms::DLC1ClothesVampireLordArmor) {
 			_data.armor.subType = ArmorSubType::kBody;
-			_data.subTypeDisplay = "$Body";
+			//_data.subTypeDisplay = "$Body";
 		}
 	}
 
@@ -240,15 +240,15 @@ namespace QuickLoot::Items
 
 		// https://github.com/schlangster/skyui/blob/835428728e2305865e220fdfc99d791434955eb1/src/ItemMenus/InventoryDataSetter.as#L145
 
-		for (const auto& entry : MaterialTable) {
-			if (_object->HasAnyKeywordByEditorID(entry.keywords)) {
-				_data.material.material = entry.material;
-				_data.material.materialDisplay = entry.materialDisplay;
-				return;
-			}
-		}
+		//for (const auto& entry : MaterialTable) {
+		//	if (_object->HasAnyKeywordByEditorID(entry.keywords)) {
+		//		//_data.material.material = entry.material;
+		//		//_data.material.materialDisplay = entry.materialDisplay;
+		//		return;
+		//	}
+		//}
 
-		_data.material.materialDisplay = "$Other";
+		//_data.material.materialDisplay = "$Other";
 	}
 
 	void ItemStack::SkyUiProcessBookType()
@@ -263,24 +263,24 @@ namespace QuickLoot::Items
 
 		if (_object->HasKeywordByEditorID("VendorItemRecipe")) {
 			_data.book.subType = BookSubType::kRecipe;
-			_data.subTypeDisplay = "$Recipe";
+			//_data.subTypeDisplay = "$Recipe";
 			return;
 		}
 
 		if (_object->HasKeywordByEditorID("VendorItemSpellTome")) {
 			_data.book.subType = BookSubType::kSpellTome;
-			_data.subTypeDisplay = "$Spell Tome";
+			//_data.subTypeDisplay = "$Spell Tome";
 			return;
 		}
 
 		if (_data.book.bookType.value.underlying() == static_cast<uint8_t>(BookType::kNoteScroll)) {
 			_data.book.subType = BookSubType::kNote;
-			_data.subTypeDisplay = "$Note";
+			//_data.subTypeDisplay = "$Note";
 			return;
 		}
 
 		_data.book.subType.unset();
-		_data.subTypeDisplay = "$Book";
+		//_data.subTypeDisplay = "$Book";
 	}
 
 	void ItemStack::SkyUiProcessMiscType()
@@ -292,13 +292,13 @@ namespace QuickLoot::Items
 		for (const auto& entry : MiscSubTypeTable) {
 			if (_object->HasAnyKeywordByEditorID(entry.keywords)) {
 				_data.misc.subType = entry.subType;
-				_data.subTypeDisplay = entry.subTypeDisplay;
+				//_data.subTypeDisplay = entry.subTypeDisplay;
 				return;
 			}
 		}
 
 		_data.misc.subType.unset();
-		_data.subTypeDisplay = "$Misc";
+		//_data.subTypeDisplay = "$Misc";
 	}
 
 	void ItemStack::SkyUiProcessMiscKnownForms()
@@ -309,31 +309,31 @@ namespace QuickLoot::Items
 
 		if (_object == KnownForms::Gold001) {
 			_data.misc.subType = MiscType::kGold;
-			_data.subTypeDisplay = "$Gold";
+			//_data.subTypeDisplay = "$Gold";
 			return;
 		}
 
 		if (_object == KnownForms::Lockpick) {
 			_data.misc.subType = MiscType::kLockpick;
-			_data.subTypeDisplay = "$Lockpick";
+			//_data.subTypeDisplay = "$Lockpick";
 			return;
 		}
 
 		if (_object == KnownForms::Leather01) {
 			_data.misc.subType = MiscType::kLeather;
-			_data.subTypeDisplay = "$Leather";
+			//_data.subTypeDisplay = "$Leather";
 			return;
 		}
 
 		if (_object == KnownForms::LeatherStrips) {
 			_data.misc.subType = MiscType::kLeatherStrips;
-			_data.subTypeDisplay = "$Strips";
+			//_data.subTypeDisplay = "$Strips";
 			return;
 		}
 
 		if (_object == KnownForms::GemAmethystFlawless) {
 			_data.misc.subType = MiscType::kGem;
-			_data.subTypeDisplay = "$Gem";
+			//_data.subTypeDisplay = "$Gem";
 			return;
 		}
 
@@ -349,7 +349,7 @@ namespace QuickLoot::Items
 			_object == KnownForms::FFI01Claw ||
 			_object == KnownForms::MS13GoldenClaw) {
 			_data.misc.subType = MiscType::kDragonClaw;
-			_data.subTypeDisplay = "$Claw";
+			//_data.subTypeDisplay = "$Claw";
 			return;
 		}
 	}
@@ -369,62 +369,62 @@ namespace QuickLoot::Items
 			switch (animationType.get()) {
 			case WeaponAnimationType::kHandToHandMelee:
 				_data.weapon.subType = WeaponType::kMelee;
-				_data.subTypeDisplay = "$Melee";
+				//_data.subTypeDisplay = "$Melee";
 				break;
 
 			case WeaponAnimationType::kOneHandSword:
 				_data.weapon.subType = WeaponType::kSword;
-				_data.subTypeDisplay = "$Sword";
+				//_data.subTypeDisplay = "$Sword";
 				break;
 
 			case WeaponAnimationType::kOneHandDagger:
 				_data.weapon.subType = WeaponType::kDagger;
-				_data.subTypeDisplay = "$Dagger";
+				//_data.subTypeDisplay = "$Dagger";
 				break;
 
 			case WeaponAnimationType::kOneHandAxe:
 				_data.weapon.subType = WeaponType::kWarAxe;
-				_data.subTypeDisplay = "$War Axe";
+				//_data.subTypeDisplay = "$War Axe";
 				break;
 
 			case WeaponAnimationType::kOneHandMace:
 				_data.weapon.subType = WeaponType::kMace;
-				_data.subTypeDisplay = "$Mace";
+				//_data.subTypeDisplay = "$Mace";
 				break;
 
 			case WeaponAnimationType::kTwoHandSword:
 				_data.weapon.subType = WeaponType::kGreatsword;
-				_data.subTypeDisplay = "$Greatsword";
+				//_data.subTypeDisplay = "$Greatsword";
 				break;
 
 			case WeaponAnimationType::kTwoHandAxe:
 				if (_object->HasKeywordByEditorID("WeapTypeWarhammer")) {
 					_data.weapon.subType = WeaponType::kWarhammer;
-					_data.subTypeDisplay = "$Warhammer";
+					//_data.subTypeDisplay = "$Warhammer";
 				} else {
 					_data.weapon.subType = WeaponType::kBattleaxe;
-					_data.subTypeDisplay = "$Battleaxe";
+					//_data.subTypeDisplay = "$Battleaxe";
 				}
 				break;
 
 			case WeaponAnimationType::kBow:
 				_data.weapon.subType = WeaponType::kBow;
-				_data.subTypeDisplay = "$Bow";
+				//_data.subTypeDisplay = "$Bow";
 				break;
 
 			case WeaponAnimationType::kStaff:
 				_data.weapon.subType = WeaponType::kStaff;
-				_data.subTypeDisplay = "$Staff";
+				//_data.subTypeDisplay = "$Staff";
 				break;
 
 			case WeaponAnimationType::kCrossbow:
 				_data.weapon.subType = WeaponType::kCrossbow;
-				_data.subTypeDisplay = "$Crossbow";
+				//_data.subTypeDisplay = "$Crossbow";
 				break;
 
 			default:
 				_data.weapon.subType.unset();
-				_data.subTypeDisplay = "$Weapon";
+				//_data.subTypeDisplay = "$Weapon";
 				break;
 			}
 		}
@@ -440,14 +440,14 @@ namespace QuickLoot::Items
 			_object == KnownForms::SSDRocksplinterPickaxe ||
 			_object == KnownForms::dunVolunruudPickaxe) {
 			_data.weapon.subType = WeaponType::kPickaxe;
-			_data.subTypeDisplay = "$Pickaxe";
+			//_data.subTypeDisplay = "$Pickaxe";
 			return;
 		}
 
 		if (_object == KnownForms::Axe01 ||
 			_object == KnownForms::dunHaltedStreamPoachersAxe) {
 			_data.weapon.subType = WeaponType::kWoodAxe;
-			_data.subTypeDisplay = "$Wood Axe";
+			//_data.subTypeDisplay = "$Wood Axe";
 			return;
 		}
 	}
@@ -461,10 +461,10 @@ namespace QuickLoot::Items
 		if (const auto ammo = skyrim_cast<RE::TESAmmo*>(_object)) {
 			if (ammo->GetRuntimeData().data.flags.all(AmmoFlags::kNonBolt)) {
 				_data.ammo.subType = AmmoType::kArrow;
-				_data.subTypeDisplay = "$Arrow";
+				//_data.subTypeDisplay = "$Arrow";
 			} else {
 				_data.ammo.subType = AmmoType::kBolt;
-				_data.subTypeDisplay = "$Bolt";
+				//_data.subTypeDisplay = "$Bolt";
 			}
 		}
 	}
@@ -476,28 +476,28 @@ namespace QuickLoot::Items
 		// https://github.com/schlangster/skyui/blob/835428728e2305865e220fdfc99d791434955eb1/src/ItemMenus/InventoryDataSetter.as#L585
 
 		if (_object == KnownForms::DaedricArrow) {
-			_data.material.material = MaterialType::kDaedric;
-			_data.material.materialDisplay = "$Daedric";
+			//_data.material.material = MaterialType::kDaedric;
+			//_data.material.materialDisplay = "$Daedric";
 			return;
 		}
 
 		if (_object == KnownForms::EbonyArrow) {
-			_data.material.material = MaterialType::kEbony;
-			_data.material.materialDisplay = "$Ebony";
+			//_data.material.material = MaterialType::kEbony;
+			//_data.material.materialDisplay = "$Ebony";
 			return;
 		}
 
 		if (_object == KnownForms::GlassArrow) {
-			_data.material.material = MaterialType::kGlass;
-			_data.material.materialDisplay = "$Glass";
+			//_data.material.material = MaterialType::kGlass;
+			//_data.material.materialDisplay = "$Glass";
 			return;
 		}
 
 		if (_object == KnownForms::ElvenArrow ||
 			_object == KnownForms::DLC1ElvenArrowBlessed ||
 			_object == KnownForms::DLC1ElvenArrowBlood) {
-			_data.material.material = MaterialType::kElven;
-			_data.material.materialDisplay = "$Elven";
+			//_data.material.material = MaterialType::kElven;
+			//_data.material.materialDisplay = "$Elven";
 			return;
 		}
 
@@ -506,39 +506,39 @@ namespace QuickLoot::Items
 			_object == KnownForms::DwarvenSphereBolt01 ||
 			_object == KnownForms::DwarvenSphereBolt02 ||
 			_object == KnownForms::DLC2DwarvenBallistaBolt) {
-			_data.material.material = MaterialType::kDwarven;
-			_data.material.materialDisplay = "$Dwarven";
+			//_data.material.material = MaterialType::kDwarven;
+			//_data.material.materialDisplay = "$Dwarven";
 			return;
 		}
 
 		if (_object == KnownForms::OrcishArrow) {
-			_data.material.material = MaterialType::kOrcish;
-			_data.material.materialDisplay = "$Orcish";
+			//_data.material.material = MaterialType::kOrcish;
+			//_data.material.materialDisplay = "$Orcish";
 			return;
 		}
 
 		if (_object == KnownForms::NordHeroArrow) {
-			_data.material.material = MaterialType::kNordic;
-			_data.material.materialDisplay = "$Nordic";
+			//_data.material.material = MaterialType::kNordic;
+			//_data.material.materialDisplay = "$Nordic";
 			return;
 		}
 
 		if (_object == KnownForms::DraugrArrow) {
-			_data.material.material = MaterialType::kDraugr;
-			_data.material.materialDisplay = "$Draugr";
+			//_data.material.material = MaterialType::kDraugr;
+			//_data.material.materialDisplay = "$Draugr";
 			return;
 		}
 
 		if (_object == KnownForms::FalmerArrow) {
-			_data.material.material = MaterialType::kFalmer;
-			_data.material.materialDisplay = "$Falmer";
+			//_data.material.material = MaterialType::kFalmer;
+			//_data.material.materialDisplay = "$Falmer";
 			return;
 		}
 
 		if (_object == KnownForms::SteelArrow ||
 			_object == KnownForms::MQ101SteelArrow) {
-			_data.material.material = MaterialType::kSteel;
-			_data.material.materialDisplay = "$Steel";
+			//_data.material.material = MaterialType::kSteel;
+			//_data.material.materialDisplay = "$Steel";
 			return;
 		}
 
@@ -550,21 +550,21 @@ namespace QuickLoot::Items
 			_object == KnownForms::dunGeirmundSigdisArrowsIllusion ||
 			_object == KnownForms::FollowerIronArrow ||
 			_object == KnownForms::TestDLC1Bolt) {
-			_data.material.material = MaterialType::kIron;
-			_data.material.materialDisplay = "$Iron";
+			//_data.material.material = MaterialType::kIron;
+			//_data.material.materialDisplay = "$Iron";
 			return;
 		}
 
 		if (_object == KnownForms::ForswornArrow) {
-			_data.material.material = MaterialType::kHide;
-			_data.material.materialDisplay = "$Forsworn";
+			//_data.material.material = MaterialType::kHide;
+			//_data.material.materialDisplay = "$Forsworn";
 			return;
 		}
 
 		if (_object == KnownForms::DLC2RieklingSpearThrown) {
-			_data.material.material = MaterialType::kWood;
-			_data.material.materialDisplay = "$Wood";
-			_data.subTypeDisplay = "$Spear";
+			//_data.material.material = MaterialType::kWood;
+			//_data.material.materialDisplay = "$Wood";
+			//_data.subTypeDisplay = "$Spear";
 			return;
 		}
 	}
@@ -575,15 +575,15 @@ namespace QuickLoot::Items
 
 		// https://github.com/schlangster/skyui/blob/835428728e2305865e220fdfc99d791434955eb1/src/ItemMenus/InventoryDataSetter.as#L659
 
-		_data.subTypeDisplay = "$Key";
+		//_data.subTypeDisplay = "$Key";
 
-		if (_data.infoValue <= 0) {
-			_data.infoValue.unset();
-		}
-
-		if (_data.infoWeight <= 0) {
-			_data.infoWeight.unset();
-		}
+		//if (_data.infoValue <= 0) {
+		//	_data.infoValue.unset();
+		//}
+		
+		//if (_data.infoWeight <= 0) {
+		//	_data.infoWeight.unset();
+		//}
 	}
 
 	void ItemStack::SkyUiProcessPotionType()
@@ -596,17 +596,17 @@ namespace QuickLoot::Items
 			if (alchemyItem->data.flags.all(AlchemyFlags::kFoodItem)) {
 				if (alchemyItem->data.consumptionSound == KnownForms::ITMPotionUse) {
 					_data.potion.subType = PotionType::kDrink;
-					_data.subTypeDisplay = "$Drink";
+					//_data.subTypeDisplay = "$Drink";
 				} else {
 					_data.potion.subType = PotionType::kFood;
-					_data.subTypeDisplay = "$Food";
+					//_data.subTypeDisplay = "$Food";
 				}
 				return;
 			}
 
 			if (alchemyItem->data.flags.all(AlchemyFlags::kPoison)) {
 				_data.potion.subType = PotionType::kPoison;
-				_data.subTypeDisplay = "$Poison";
+				//_data.subTypeDisplay = "$Poison";
 				return;
 			}
 
@@ -615,13 +615,13 @@ namespace QuickLoot::Items
 			for (const auto& entry : PotionTypeTable) {
 				if (entry.actorValue == actorValue) {
 					_data.potion.subType = entry.subType;
-					_data.subTypeDisplay = entry.subTypeDisplay;
+					//_data.subTypeDisplay = entry.subTypeDisplay;
 					return;
 				}
 			}
 
 			_data.potion.subType = PotionType::kPotion;
-			_data.subTypeDisplay = "$Potion";
+			//_data.subTypeDisplay = "$Potion";
 		}
 	}
 
@@ -631,7 +631,7 @@ namespace QuickLoot::Items
 
 		// https://github.com/schlangster/skyui/blob/835428728e2305865e220fdfc99d791434955eb1/src/ItemMenus/InventoryDataSetter.as#L744
 
-		_data.subTypeDisplay = "$Soul Gem";
+		//_data.subTypeDisplay = "$Soul Gem";
 
 		if (const auto soulGem = skyrim_cast<RE::TESSoulGem*>(_object)) {
 			if (soulGem->soulCapacity) {

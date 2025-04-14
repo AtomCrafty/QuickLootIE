@@ -146,8 +146,8 @@ namespace QuickLoot::Items
 
 	struct MaterialItemData
 	{
-		OptionalField<MaterialType> material;
-		MandatoryField<const char*> materialDisplay;
+		//OptionalField<MaterialType> material;
+		//MandatoryField<const char*> materialDisplay;
 	};
 
 	struct ArmorItemData : MaterialItemData
@@ -155,9 +155,9 @@ namespace QuickLoot::Items
 		MandatoryEnumField<ArmorSlot> partMask;
 		OptionalEnumField<ArmorWeightClass> weightClass;
 		MandatoryField<float> armor;
-		MandatoryField<float> infoArmor;
+		//MandatoryField<float> infoArmor;
 		MandatoryField<bool> isEnchanted;
-		MandatoryField<const char*> weightClassDisplay;
+		//MandatoryField<const char*> weightClassDisplay;
 		MandatoryEnumField<ArmorSlot> mainPartMask;
 		OptionalEnumField<ArmorSubType> subType;
 	};
@@ -174,7 +174,7 @@ namespace QuickLoot::Items
 		MandatoryField<uint16_t> baseDamage;
 		OptionalField<RE::FormID> equipSlot;
 		MandatoryField<float> damage;
-		MandatoryField<float> infoDamage;
+		//MandatoryField<float> infoDamage;
 		MandatoryField<bool> isPoisoned;
 		MandatoryField<bool> isEnchanted;
 		OptionalEnumField<WeaponType> subType;
@@ -184,7 +184,7 @@ namespace QuickLoot::Items
 	{
 		MandatoryEnumField<AmmoFlags, uint8_t> flags;
 		MandatoryField<float> damage;
-		MandatoryField<float> infoDamage;
+		//MandatoryField<float> infoDamage;
 		MandatoryField<bool> isEnchanted;
 		OptionalEnumField<AmmoType> subType;
 	};
@@ -212,7 +212,7 @@ namespace QuickLoot::Items
 	struct AlchemyItemData : MagicItemData
 	{
 		MandatoryEnumField<AlchemyFlags, uint32_t> flags;
-		OptionalField<RE::TESForm*> useSound;
+		//OptionalField<RE::TESForm*> useSound;
 		OptionalEnumField<PotionType> subType;
 	};
 
@@ -274,14 +274,14 @@ namespace QuickLoot::Items
 
 	struct ItemData
 	{
-		MandatoryField<const char*> text;
+		//MandatoryField<const char*> text;
 		MandatoryField<uint32_t> count;
 		MandatoryField<uint32_t> equipState;
-		MandatoryField<uint32_t> filterFlag;
-		MandatoryField<uint32_t> favorite;
-		MandatoryField<bool> enabled;
+		//MandatoryField<uint32_t> filterFlag;
+		//MandatoryField<uint32_t> favorite;
+		//MandatoryField<bool> enabled;
 		MandatoryField<bool> isStealing;
-		MandatoryField<SoulLevel> soulLVL;
+		//MandatoryField<SoulLevel> soulLVL;
 
 		MandatoryEnumField<RE::FormType, uint8_t> formType;
 		MandatoryField<RE::FormID> formId;
@@ -290,16 +290,16 @@ namespace QuickLoot::Items
 		MandatoryField<int32_t> value;
 		MandatoryField<float> weight;
 
-		MandatoryField<RE::FormID> baseId;
+		//MandatoryField<RE::FormID> baseId;
 		MandatoryEnumField<ItemType> type;
 		MandatoryField<bool> isEquipped;
 		MandatoryField<bool> isStolen;
 
-		OptionalField<float> infoValue;
-		OptionalField<float> infoWeight;
-		OptionalField<float> infoValueWeight;
+		//OptionalField<float> infoValue;
+		//OptionalField<float> infoWeight;
+		//OptionalField<float> infoValueWeight;
 
-		MandatoryField<const char*> subTypeDisplay;
+		//MandatoryField<const char*> subTypeDisplay;
 		MandatoryField<const char*> iconLabel;
 		OptionalField<uint32_t> iconColor;
 

@@ -93,14 +93,14 @@ namespace QuickLoot::Items
 
 		view->CreateObject(&_dataObj);
 
-		SetDataMember(_dataObj, "text", data.text);
+		//SetDataMember(_dataObj, "text", data.text);
 		SetDataMember(_dataObj, "count", data.count);
 		SetDataMember(_dataObj, "equipState", data.equipState);
-		SetDataMember(_dataObj, "filterFlag", data.filterFlag);
-		SetDataMember(_dataObj, "favorite", data.favorite);
-		SetDataMember(_dataObj, "enabled", data.enabled);
+		//SetDataMember(_dataObj, "filterFlag", data.filterFlag);
+		//SetDataMember(_dataObj, "favorite", data.favorite);
+		//SetDataMember(_dataObj, "enabled", data.enabled);
 		SetDataMember(_dataObj, "isStealing", data.isStealing);
-		SetDataMember(_dataObj, "soulLVL", data.soulLVL);
+		//SetDataMember(_dataObj, "soulLVL", data.soulLVL);
 
 		SetDataMember(_dataObj, "formType", data.formType);
 		SetDataMember(_dataObj, "formId", data.formId);
@@ -110,36 +110,36 @@ namespace QuickLoot::Items
 		SetDataMember(_dataObj, "value", data.value);
 		SetDataMember(_dataObj, "weight", data.weight);
 
-		SetDataMember(_dataObj, "baseId", data.baseId);
-		SetDataMember(_dataObj, "type", data.type);
+		//SetDataMember(_dataObj, "baseId", data.baseId);
+		//SetDataMember(_dataObj, "type", data.type);
 		SetDataMember(_dataObj, "isEquipped", data.isEquipped);
 		SetDataMember(_dataObj, "isStolen", data.isStolen);
 
-		SetDataMember(_dataObj, "infoValue", data.infoValue);
-		SetDataMember(_dataObj, "infoWeight", data.infoWeight);
-		SetDataMember(_dataObj, "infoValueWeight", data.infoValueWeight);
+		//SetDataMember(_dataObj, "infoValue", data.infoValue);
+		//SetDataMember(_dataObj, "infoWeight", data.infoWeight);
+		//SetDataMember(_dataObj, "infoValueWeight", data.infoValueWeight);
 
-		SetDataMember(_dataObj, "subTypeDisplay", data.subTypeDisplay);
+		//SetDataMember(_dataObj, "subTypeDisplay", data.subTypeDisplay);
 		SetDataMember(_dataObj, "iconLabel", data.iconLabel);
 		SetDataMember(_dataObj, "iconColor", data.iconColor);
 
 		switch (data.formType.value.get()) {
 		case RE::FormType::Armor:
-			SetDataMember(_dataObj, "material", data.armor.material);
-			SetDataMember(_dataObj, "materialDisplay", data.armor.materialDisplay);
+			//SetDataMember(_dataObj, "material", data.armor.material);
+			//SetDataMember(_dataObj, "materialDisplay", data.armor.materialDisplay);
 			SetDataMember(_dataObj, "partMask", data.armor.partMask);
 			SetDataMember(_dataObj, "weightClass", data.armor.weightClass);
 			SetDataMember(_dataObj, "armor", data.armor.armor);
-			SetDataMember(_dataObj, "infoArmor", data.armor.infoArmor);
+			//SetDataMember(_dataObj, "infoArmor", data.armor.infoArmor);
 			SetDataMember(_dataObj, "isEnchanted", data.armor.isEnchanted);
-			SetDataMember(_dataObj, "weightClassDisplay", data.armor.weightClassDisplay);
-			SetDataMember(_dataObj, "mainPartMask", data.armor.mainPartMask);
+			//SetDataMember(_dataObj, "weightClassDisplay", data.armor.weightClassDisplay);
+			//SetDataMember(_dataObj, "mainPartMask", data.armor.mainPartMask);
 			SetDataMember(_dataObj, "subType", data.armor.subType);
 			break;
 
 		case RE::FormType::Weapon:
-			SetDataMember(_dataObj, "material", data.weapon.material);
-			SetDataMember(_dataObj, "materialDisplay", data.weapon.materialDisplay);
+			//SetDataMember(_dataObj, "material", data.weapon.material);
+			//SetDataMember(_dataObj, "materialDisplay", data.weapon.materialDisplay);
 			SetDataMember(_dataObj, "weaponType", data.weapon.weaponType);
 			SetDataMember(_dataObj, "speed", data.weapon.speed);
 			SetDataMember(_dataObj, "reach", data.weapon.reach);
@@ -150,25 +150,25 @@ namespace QuickLoot::Items
 			SetDataMember(_dataObj, "baseDamage", data.weapon.baseDamage);
 			SetDataMember(_dataObj, "equipSlot", data.weapon.equipSlot);
 			SetDataMember(_dataObj, "damage", data.weapon.damage);
-			SetDataMember(_dataObj, "infoDamage", data.weapon.infoDamage);
+			//SetDataMember(_dataObj, "infoDamage", data.weapon.infoDamage);
 			SetDataMember(_dataObj, "isPoisoned", data.weapon.isPoisoned);
 			SetDataMember(_dataObj, "isEnchanted", data.weapon.isEnchanted);
 			SetDataMember(_dataObj, "subType", data.weapon.subType);
 			break;
 
 		case RE::FormType::Ammo:
-			SetDataMember(_dataObj, "material", data.armor.material);
-			SetDataMember(_dataObj, "materialDisplay", data.armor.materialDisplay);
+			//SetDataMember(_dataObj, "material", data.armor.material);
+			//SetDataMember(_dataObj, "materialDisplay", data.armor.materialDisplay);
 			SetDataMember(_dataObj, "flags", data.ammo.flags);
 			SetDataMember(_dataObj, "damage", data.ammo.damage);
-			SetDataMember(_dataObj, "infoDamage", data.ammo.infoDamage);
+			//SetDataMember(_dataObj, "infoDamage", data.ammo.infoDamage);
 			SetDataMember(_dataObj, "isEnchanted", data.ammo.isEnchanted);
 			SetDataMember(_dataObj, "subType", data.ammo.subType);
 			break;
 
 		case RE::FormType::AlchemyItem:
 			SetDataMember(_dataObj, "flags", data.potion.flags);
-			SetDataMember(_dataObj, "useSound", BuildBasicFormInfoObject(view, data.potion.useSound));
+			//SetDataMember(_dataObj, "useSound", BuildBasicFormInfoObject(view, data.potion.useSound));
 			SetDataMember(_dataObj, "subType", data.potion.subType);
 			break;
 
@@ -296,17 +296,17 @@ namespace QuickLoot::Items
 		itemData->owner = _container.native_handle();
 
 		// ItemList::Item constructor
-		_data.text = itemData->GetName();
+		//_data.text = itemData->GetName();
 		_data.count = itemData->GetCount();
-		_data.equipState = itemData->GetEquipState();
-		_data.filterFlag = itemData->GetFilterFlag();
-		_data.favorite = itemData->GetFavorite();
-		_data.enabled = itemData->GetEnabled();
+		//_data.equipState = itemData->GetEquipState();
+		//_data.filterFlag = itemData->GetFilterFlag();
+		//_data.favorite = itemData->GetFavorite();
+		//_data.enabled = itemData->GetEnabled();
 
 		// InventoryEntryData::PopulateSoulLevel
-		if (_object->Is(RE::FormType::SoulGem)) {
-			_data.soulLVL = static_cast<SoulLevel>(_entry->GetSoulLevel());
-		}
+		//if (_object->Is(RE::FormType::SoulGem)) {
+		//	_data.soulLVL = static_cast<SoulLevel>(_entry->GetSoulLevel());
+		//}
 
 		// SetIsStealingFlags
 		const auto container = _container.get().get();

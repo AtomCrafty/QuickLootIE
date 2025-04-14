@@ -187,11 +187,11 @@ namespace QuickLoot::Items
 			}
 		}
 
-		if (const auto alchemyItem = skyrim_cast<RE::AlchemyItem*>(_object)) {
-			if (const auto sound = alchemyItem->data.consumptionSound) {
-				_data.potion.useSound = sound;
-			}
-		}
+		//if (const auto alchemyItem = skyrim_cast<RE::AlchemyItem*>(_object)) {
+		//	if (const auto sound = alchemyItem->data.consumptionSound) {
+		//		_data.potion.useSound = sound;
+		//	}
+		//}
 
 		if (const auto enchantmentItem = skyrim_cast<RE::EnchantmentItem*>(_object)) {
 			_data.enchantment.flags = enchantmentItem->formFlags;
