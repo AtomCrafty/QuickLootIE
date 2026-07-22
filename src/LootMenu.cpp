@@ -15,6 +15,7 @@
 #include "Items/ItemStack.h"
 #include "LootMenuManager.h"
 #include "MenuVisibilityManager.h"
+#include "Behaviors/ActivationPrompt.h"
 #include "Util/ScaleformUtil.h"
 
 #include <numbers>
@@ -563,6 +564,10 @@ namespace QuickLoot
 		if (inventory.empty() && !UserSettings::ShowWhenEmpty() && !MenuVisibilityManager::IsForcedContainer(_container)) {
 			LootMenuManager::RequestHide();
 			return;
+		} else {
+			// At this point we know that the loot menu is supposed to stay open,
+			// so how we hide the VR activation prompt.
+			Behaviors::ActivationPrompt::HideWSActivateRollover();
 		}
 
 		API::APIServer::DispatchInvalidateLootMenuEvent(_container, inventory);
