@@ -123,7 +123,7 @@ namespace QuickLoot
 				return a.GetData().book.isRead - b.GetData().book.isRead;
 			}
 
-			return bookA - bookB;
+			return bookB - bookA;
 		}
 
 		static int Notes(Items::QuickLootItemStack& a, Items::QuickLootItemStack& b)
@@ -142,7 +142,7 @@ namespace QuickLoot
 				return a.GetData().book.isRead - b.GetData().book.isRead;
 			}
 
-			return noteA - noteB;
+			return noteB - noteA;
 		}
 
 		static int Scrolls(Items::QuickLootItemStack& a, Items::QuickLootItemStack& b)
