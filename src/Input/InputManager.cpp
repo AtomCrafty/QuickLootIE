@@ -267,8 +267,9 @@ namespace QuickLoot::Input
 			return false;
 		}
 
+		// GOG (1.6.1179) uses a different id, but the 1.7.x updates go back to 443396.
 		uint64_t aeId =
-			REL::Module::get().version() >= REL::Version(1, 6, 1179, 0) ? 510926 :
+			REL::Module::get().version() == REL::Version(1, 6, 1179, 0) ? 510926 :
 			REL::Module::get().version() >= REL::Version(1, 6, 1130, 0) ? 443396 :
 																		  68622;
 
