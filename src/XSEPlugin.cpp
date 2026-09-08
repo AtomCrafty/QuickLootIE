@@ -94,7 +94,7 @@ static void InitializeLog(spdlog::level::level_enum level = spdlog::level::info)
 	spdlog::set_pattern("[%H:%M:%S.%e] [%l] [%t] %v");
 }
 
-extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* skse)
+extern "C" __declspec(dllexport) bool SKSEPlugin_Load(const SKSE::LoadInterface* skse)
 {
 	InitializeLog();
 
@@ -107,8 +107,11 @@ extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadIn
 
 	PROFILE_SCOPE_NAMED("Plugin Startup");
 
-	SKSE::Init(skse, false);
-	SKSE::AllocTrampoline(1 << 8);
+	SKSE::Init(skse, {
+		.log = false,
+		.trampoline = true,
+		.trampolineSize = 1 << 8,
+	});
 
 	return SKSE::GetMessagingInterface()->RegisterListener(OnSKSEMessage);
 }

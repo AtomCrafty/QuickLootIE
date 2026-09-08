@@ -178,7 +178,7 @@ namespace QuickLoot::Util
 	void ScriptObject::RegisterForModEvent(RE::BSFixedString eventName, RE::BSFixedString callbackName)
 	{
 		const auto skyrimVM = RE::SkyrimVM::GetSingleton();
-		const auto vm = skyrimVM ? skyrimVM->impl : nullptr;
+		const auto vm = skyrimVM ? skyrimVM->GetVMRuntimeData().impl : nullptr;
 
 		if (vm) {
 			const auto args = RE::MakeFunctionArguments(std::move(eventName), std::move(callbackName));
@@ -191,7 +191,7 @@ namespace QuickLoot::Util
 	void ScriptObject::UnregisterForModEvent(RE::BSFixedString eventName)
 	{
 		const auto skyrimVM = RE::SkyrimVM::GetSingleton();
-		const auto vm = skyrimVM ? skyrimVM->impl : nullptr;
+		const auto vm = skyrimVM ? skyrimVM->GetVMRuntimeData().impl : nullptr;
 
 		if (vm) {
 			const auto args = RE::MakeFunctionArguments(std::move(eventName));
