@@ -8,7 +8,7 @@ PROJECT_NAME = "QuickLootIE"
 
 -- Project
 set_project(PROJECT_NAME)
-set_version("4.0.0")
+set_version("4.1.1")
 set_languages("cxx23")
 set_license("GPL-3.0-or-later")
 set_warnings("allextra", "error")
@@ -61,6 +61,7 @@ target(PROJECT_NAME)
     set_pcxxheader("src/PCH.h")
     add_files("src/**.cpp")
     add_headerfiles("src/**.h")
+    add_headerfiles("include/**.h")
     add_includedirs("src")
     add_includedirs("include")
 
