@@ -31,7 +31,7 @@ namespace QuickLoot::Util
 		const auto plugin = file ? file->fileName : "";
 
 		const RE::FormID formID = form->GetFormID();
-		const RE::FormID relativeID = formID & 0x00FFFFFF;
+		const RE::FormID relativeID = formID & (file->IsLight() ? 0x00000FFF : 0x00FFFFFF);
 
 		std::ostringstream ss;
 		ss << plugin << "|" << std::hex << relativeID;
