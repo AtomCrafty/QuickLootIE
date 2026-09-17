@@ -6,25 +6,20 @@ namespace QuickLoot::Util
 {
 	ScriptObject ScriptObject::FromForm(RE::TESForm* form, const std::string& scriptName)
 	{
-		if (!form) {
-			logger::error("Cannot retrieve script object from a None form.");
-			return {};
-		}
-
 		const auto papyrusVM = RE::BSScript::Internal::VirtualMachine::GetSingleton();
-		if (!papyrusVM) {
-			logger::error("Unable to obtain Papyrus VM.");
+
+		if (!form || !papyrusVM) {
+			return {};
 		}
 
 		const auto typeID = static_cast<RE::VMTypeID>(form->GetFormType());
 		const auto handle = papyrusVM->handlePolicy->GetHandleForObject(typeID, form);
 
 		ScriptObjectPtr object;
-		papyrusVM->FindBoundObject(handle, scriptName.c_str(), object);
-
-		if (!object) {
+		if (!papyrusVM->FindBoundObject(handle, scriptName.c_str(), object) || !object) {
 			std::string formIdentifier = FormUtil::GetIdentifierFromForm(form);
 			logger::error("Script {} is not attached to form [{}]", scriptName, formIdentifier);
+			return {};
 		}
 
 		return ScriptObject(object);
