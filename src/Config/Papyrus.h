@@ -4,7 +4,7 @@
 
 namespace QuickLoot::Config
 {
-	static Util::ScriptObject MCMScript{};
+	static RE::TESQuest* MCMQuest{ nullptr };
 
 	inline bool QLIE_ShowInCombat;
 	inline bool QLIE_ShowWhenEmpty;
@@ -140,9 +140,9 @@ namespace QuickLoot::Config
 		}
 
 		template <typename T>
-		static void LoadSetting(T& variable, const std::string& propertyName, const T& defaultValue)
+		static void LoadSetting(Util::ScriptObject& mcmscript, T& variable, const std::string& propertyName, const T& defaultValue)
 		{
-			const auto* prop = MCMScript.GetProperty(propertyName);
+			const auto* prop = mcmscript.GetProperty(propertyName);
 
 			if (!prop) {
 				variable = defaultValue;

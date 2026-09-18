@@ -40,22 +40,24 @@ namespace QuickLoot::Config
 			return;
 		};
 
-		MCMScript = Util::ScriptObject::FromForm(quest, "QuickLootIEMCM");
-		if (!MCMScript.IsValid()) {
-			logger::info("Unable to locate MCM script on form");
-			return;
-		};
+		MCMQuest = quest;
 
-		logger::info("MCM pointer set successfully");
+		logger::info("MCM quest pointer set successfully");
 
 		UserSettings::Update();
 	};
 
 	void Papyrus::UpdateVariables(RE::StaticFunctionTag*)
 	{
+		auto MCMScript = Util::ScriptObject::FromForm(MCMQuest, "QuickLootIEMCM");
+		if (!MCMScript.IsValid()) {
+			logger::error("Unable to locate MCM script on form");
+			return;
+		}
+
 		PROFILE_SCOPE;
 
-#define LoadSettingsVar(name, ...) LoadSetting(name, #name, __VA_ARGS__)
+#define LoadSettingsVar(name, ...) LoadSetting(MCMScript, name, #name, __VA_ARGS__)
 
 		// General > Behavior Settings
 		LoadSettingsVar(QLIE_ShowInCombat, true);
