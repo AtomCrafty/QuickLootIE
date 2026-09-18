@@ -140,15 +140,9 @@ namespace QuickLoot::Config
 		}
 
 		template <typename T>
-		static void LoadSetting(T& variable, const std::string& propertyName, const T& defaultValue)
+		static void LoadSetting(Util::ScriptObject& mcmscript, T& variable, const std::string& propertyName, const T& defaultValue)
 		{
-			auto MCMScript = Util::ScriptObject::FromForm(MCMQuest, "QuickLootIEMCM");
-			if (!MCMScript.IsValid()) {
-				logger::error("Unable to locate MCM script on form");
-				return;
-			}
-
-			const auto* prop = MCMScript.GetProperty(propertyName);
+			const auto* prop = mcmscript.GetProperty(propertyName);
 
 			if (!prop) {
 				variable = defaultValue;

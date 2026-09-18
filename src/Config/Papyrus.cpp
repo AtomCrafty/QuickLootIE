@@ -49,9 +49,15 @@ namespace QuickLoot::Config
 
 	void Papyrus::UpdateVariables(RE::StaticFunctionTag*)
 	{
+		auto MCMScript = Util::ScriptObject::FromForm(MCMQuest, "QuickLootIEMCM");
+		if (!MCMScript.IsValid()) {
+			logger::error("Unable to locate MCM script on form");
+			return;
+		}
+
 		PROFILE_SCOPE;
 
-#define LoadSettingsVar(name, ...) LoadSetting(name, #name, __VA_ARGS__)
+#define LoadSettingsVar(name, ...) LoadSetting(MCMScript, name, #name, __VA_ARGS__)
 
 		// General > Behavior Settings
 		LoadSettingsVar(QLIE_ShowInCombat, true);
