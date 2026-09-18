@@ -143,8 +143,7 @@ namespace QuickLoot::Config
 		static void LoadSetting(T& variable, const std::string& propertyName, const T& defaultValue)
 		{
 			auto MCMScript = Util::ScriptObject::FromForm(MCMQuest, "QuickLootIEMCM");
-			if (!MCMScript.IsValid())
-			{
+			if (!MCMScript.IsValid()) {
 				logger::error("Unable to locate MCM script on form");
 				return;
 			}
