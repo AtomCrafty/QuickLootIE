@@ -4,7 +4,7 @@
 
 namespace QuickLoot::Config
 {
-	static Util::ScriptObject MCMScript{};
+	static RE::TESQuest* MCMQuest{ nullptr };
 
 	inline bool QLIE_ShowInCombat;
 	inline bool QLIE_ShowWhenEmpty;
@@ -142,6 +142,13 @@ namespace QuickLoot::Config
 		template <typename T>
 		static void LoadSetting(T& variable, const std::string& propertyName, const T& defaultValue)
 		{
+			auto MCMScript = Util::ScriptObject::FromForm(MCMQuest, "QuickLootIEMCM");
+			if (!MCMScript.IsValid())
+			{
+				logger::error("Unable to locate MCM script on form");
+				return;
+			}
+
 			const auto* prop = MCMScript.GetProperty(propertyName);
 
 			if (!prop) {

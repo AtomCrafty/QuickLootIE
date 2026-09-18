@@ -40,13 +40,9 @@ namespace QuickLoot::Config
 			return;
 		};
 
-		MCMScript = Util::ScriptObject::FromForm(quest, "QuickLootIEMCM");
-		if (!MCMScript.IsValid()) {
-			logger::info("Unable to locate MCM script on form");
-			return;
-		};
+		MCMQuest = quest;
 
-		logger::info("MCM pointer set successfully");
+		logger::info("MCM quest pointer set successfully");
 
 		UserSettings::Update();
 	};
