@@ -140,9 +140,9 @@ namespace QuickLoot::Config
 		}
 
 		template <typename T>
-		static void LoadSetting(Util::ScriptObject& mcmscript, T& variable, const std::string& propertyName, const T& defaultValue)
+		static void LoadSetting(Util::ScriptObject& script, T& variable, const std::string& propertyName, const T& defaultValue)
 		{
-			const auto* prop = mcmscript.GetProperty(propertyName);
+			const auto* prop = script.GetProperty(propertyName);
 
 			if (!prop) {
 				variable = defaultValue;
