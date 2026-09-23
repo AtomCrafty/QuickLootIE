@@ -342,7 +342,15 @@ namespace QuickLoot::Input
 			_allInputKeys.insert(keybinding.inputKey);
 
 			if (keybinding.modifierKey) {
-				_allModifierKeys.insert(*keybinding.modifierKey);
+
+				// Specifying the same input key as modifier turns it into a "hold" keybinding.
+				if (*keybinding.modifierKey == keybinding.inputKey) {
+					keybinding.modifierKey.reset();
+					keybinding.flags.set(KeybindingFlags::kOnHold);
+				}
+				else {
+					_allModifierKeys.insert(*keybinding.modifierKey);
+				}
 			}
 
 			if (keybinding.flags.all(KeybindingFlags::kOnHold)) {

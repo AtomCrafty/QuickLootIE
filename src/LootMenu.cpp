@@ -1,5 +1,6 @@
 #include "LootMenu.h"
 
+#include "Behaviors/ActivationPrompt.h"
 #include "Behaviors/ContainerAnimator.h"
 #include "CLIK/Array.h"
 #include "CLIK/GFx/Controls/ButtonBar.h"
@@ -15,7 +16,6 @@
 #include "Items/ItemStack.h"
 #include "LootMenuManager.h"
 #include "MenuVisibilityManager.h"
-#include "Behaviors/ActivationPrompt.h"
 #include "Util/ScaleformUtil.h"
 
 #include <SKSE/API.h>
@@ -598,7 +598,6 @@ namespace QuickLoot
 			}
 
 			if (UserSettings::ShowIconBest() && _inventory.size() > 0) {
-
 				for (size_t index : Items::Inventory::FindBestInClassItems(inventory)) {
 					_inventory[index]->GetData().bestInClass = true;
 				}
@@ -654,9 +653,13 @@ namespace QuickLoot
 		_buttonBarProvider.ClearElements();
 
 		for (const auto& keybinding : keybindings) {
-			const auto label = GetActionDisplayName(keybinding.action, stealing);
-			const auto index = keybinding.buttonArtOverride != Input::ButtonArtIndex::kNone ? keybinding.buttonArtOverride : Input::ButtonArt::GetFrameIndexForDeviceKey(keybinding.inputKey);
-			buttons.emplace_back(label, static_cast<uint16_t>(index), stealing, keybinding.action);
+			const auto label = keybinding.flags.all(Input::KeybindingFlags::kOnHold) ?
+			                       std::string("$qlie_Hold{") + GetActionDisplayName(keybinding.action, stealing) + "}" :
+			                       GetActionDisplayName(keybinding.action, stealing);
+			const auto index = keybinding.buttonArtOverride != Input::ButtonArtIndex::kNone ?
+			                       keybinding.buttonArtOverride :
+			                       Input::ButtonArt::GetFrameIndexForDeviceKey(keybinding.inputKey);
+			buttons.emplace_back(label.c_str(), static_cast<uint16_t>(index), stealing, keybinding.action);
 		}
 
 		bool isItemSelected = _selectedIndex >= 0 && _selectedIndex < _inventory.size();
